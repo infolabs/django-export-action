@@ -11,13 +11,9 @@ def export_selected_objects(modeladmin, request, queryset):
     ct = ContentType.objects.get_for_model(queryset.model)
     url = reverse("export_action:export")
 
-    if len(selected) > 1000:
-        session_key = "export_action_%s" % uuid.uuid4()
-        request.session[session_key] = selected
-        return HttpResponseRedirect("%s?ct=%s&session_key=%s" % (url, ct.pk, session_key))
-    else:
-        return HttpResponseRedirect(
-            "%s?ct=%s&ids=%s" % (url, ct.pk, ",".join(str(pk) for pk in selected)))
+    session_key = "export_action_%s" % uuid.uuid4()
+    request.session[session_key] = selected
+    return HttpResponseRedirect("%s?ct=%s&session_key=%s" % (url, ct.pk, session_key))
 
 
 export_selected_objects.short_description = _("Export selected items...")
