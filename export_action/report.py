@@ -17,7 +17,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 
-from django.utils.six import BytesIO, text_type
+from six import BytesIO, text_type
 
 from .introspection import get_model_from_path_string
 

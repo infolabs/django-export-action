@@ -1,11 +1,11 @@
 # -- encoding: UTF-8 --
+from six import python_2_unicode_compatible
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 
 
 @python_2_unicode_compatible
 class Publication(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -62,8 +62,8 @@ class Article(models.Model):
 
 @python_2_unicode_compatible
 class ArticleTag(models.Model):
-    tag = models.ForeignKey(Tag)
-    article = models.ForeignKey(Article)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
     created_on = models.DateTimeField('created on', auto_now_add=True)
 
